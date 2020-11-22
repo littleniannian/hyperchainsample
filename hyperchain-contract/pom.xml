@@ -26,12 +26,6 @@
     </dependency>
 
     <dependency>
-      <groupId>cn.hyperchain</groupId>
-      <artifactId>litesdk</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
@@ -59,6 +53,9 @@
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.1</version>
+          <configuration>
+            <skipTests>true</skipTests>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
@@ -69,8 +66,7 @@
                 <!--change addClasspath to true if daks is desktop version-->
                 <addClasspath>true</addClasspath>
                 <classpathPrefix>lib/</classpathPrefix>
-                <!--FIXME-->
-                <mainClass>test</mainClass>
+                <mainClass>org.example.contract.StoneTransaction</mainClass>
                 <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                 <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
               </manifest>

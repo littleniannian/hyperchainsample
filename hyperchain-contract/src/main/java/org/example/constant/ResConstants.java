@@ -38,4 +38,11 @@ public enum ResConstants {
     }
 
 
+    @Override
+    public String toString() {
+        return "ResConstants{" +
+                "code=" + code +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

@@ -45,4 +45,12 @@ public class ContractRes<T> {
     public void setData(T data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "ContractRes{" +
+                "msg=" + msg +
+                ", data=" + data +
+                '}';
+    }
 }

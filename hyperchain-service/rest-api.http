@@ -1,0 +1,37 @@
+###创建用户
+POST http://localhost:8081/trading/user/美国
+Accept: */*
+Cache-Control: no-cache
+
+###创建产品
+POST http://localhost:8081/trading/product
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "accountName":"中国",
+  "stoneName":"金刚石",
+  "count":300
+}
+
+
+###转账
+POST http://localhost:8081/trading/transfer
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "from":"AAA",
+  "to":"中国",
+  "stoneName":"韩国",
+  "count":-4
+}
+
+###查看余额
+GET http://localhost:8081/trading/balance/中国
+
+###查看记录
+GET http://localhost:8081/trading/record/金刚石/3
+

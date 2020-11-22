@@ -3,11 +3,17 @@ package org.example.util;
 import org.example.constant.ComConstants;
 
 public class ComUtil {
+
     public static String genKey(String...params){
-        return String.join(ComConstants.SPLIT_CHAR,params);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < params.length ; i++) {
+            if(i == params.length-1){
+                sb.append(params[i]);
+            }else{
+                sb.append(params[i]).append(ComConstants.SPLIT_CHAR);
+            }
+        }
+        return sb.toString();
     }
 
-    public static String[] splitKey(String key){
-        return key.split(ComConstants.SPLIT_CHAR);
-    }
 }

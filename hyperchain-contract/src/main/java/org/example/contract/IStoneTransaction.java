@@ -1,5 +1,6 @@
 package org.example.contract;
 
+import cn.hyperchain.contract.BaseContractInterface;
 import org.example.dto.ContractRes;
 import org.example.entity.Account;
 import org.example.entity.Balance;
@@ -7,7 +8,7 @@ import org.example.entity.Record;
 
 import java.util.List;
 
-public interface IStoneTransaction {
+public interface IStoneTransaction extends BaseContractInterface {
     ContractRes<Account> createUser(String name);
 
     ContractRes<Balance> createProduct(String account,String stone,Integer count);

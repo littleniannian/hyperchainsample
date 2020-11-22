@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>hyperchain-contract</module>
+        <module>hyperchain-service</module>
     </modules>
 
 

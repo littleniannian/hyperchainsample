@@ -3,6 +3,8 @@ package org.example.contract;
 import cn.hyperchain.annotations.StoreField;
 import cn.hyperchain.contract.BaseContract;
 import cn.hyperchain.core.HyperMap;
+import org.apache.commons.lang3.StringUtils;
+import org.example.constant.ComConstants;
 import org.example.constant.ResConstants;
 import org.example.dto.ContractRes;
 import org.example.entity.Account;
@@ -47,6 +49,7 @@ public class StoneTransaction extends BaseContract implements IStoneTransaction 
         String balanceKey = ComUtil.genKey(account,stone);
         Balance balance = this.balances.get(balanceKey);
         if(balance == null){
+            balance = new Balance();
             balance.setId(balanceKey);
             balance.setStart(1);
             balance.setEnd(count);
@@ -57,7 +60,6 @@ public class StoneTransaction extends BaseContract implements IStoneTransaction 
             this.accounts.put(account,act);
         }else{
             balance.setEnd(balance.getEnd()+count);
-
         }
         this.balances.put(balanceKey,balance);
         return new ContractRes<>(ResConstants.OK,balance);
@@ -74,8 +76,8 @@ public class StoneTransaction extends BaseContract implements IStoneTransaction 
         if(fromCount<count)
             return new ContractRes<>(ResConstants.BALANCE_NOT_ENOUGH,null);
         String startNum = String.valueOf(fromBalance.getStart());
-        String endNum = String.valueOf(fromBalance.getStart()+count);
-        fromBalance.setStart(count+1);
+        String endNum = String.valueOf(fromBalance.getStart()+count-1);
+        fromBalance.setStart(fromBalance.getStart()+count);
         this.balances.put(ComUtil.genKey(from,stone),fromBalance);
         if(toBalance == null){
             Account toAccount = this.accounts.get(to);
@@ -114,7 +116,7 @@ public class StoneTransaction extends BaseContract implements IStoneTransaction 
         List<Record> records = new ArrayList<>();
         Set<String> recordKeys = this.records.keySet();
         for (String key: recordKeys) {
-            String[] keyArr = ComUtil.splitKey(key);
+            String[] keyArr = key.split(ComConstants.SPLIT_CHAR);
             if(keyArr[0].equals(stoneName)
                 && Integer.parseInt(keyArr[1])<=num
                 && Integer.parseInt(keyArr[2])>=num){
